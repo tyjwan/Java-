@@ -503,7 +503,7 @@ final Node<K,V>[] resize() {
 
 ### 六. JDK7 和 JDK8 HashMap对比
 
-1. JDK7中resize采用头插法，JDK8采用尾插法。所以JDK8能够避免死锁。
+1. JDK7中resize采用头插法，JDK8采用尾插法。所以JDK8能够避免死循环。
 
 2. JDK7中每次都要计算新的下标。而JDK8只需要判断多出的hash值的那一位是0还是1即可
 
