@@ -497,7 +497,7 @@ final Node<K,V>[] resize() {
 
 (1) 处代码对应图片解释：
 
-![image-20210111143251710](.\image\HashMap(java8 resize).png)
+![新的index计算原理](./image/HashMap(java8 resize).png)
 
 
 
@@ -511,11 +511,11 @@ final Node<K,V>[] resize() {
 
 4. hash分布均匀情况下两者的性能对比：
 
-   ![image-20210111144252005](.\image\hash分布均匀情况下对比.png)
+   ![image-20210111144252005](./image/hash分布均匀情况下对比.png)
 
 5. hash分布不均匀情况下两者的性能对比：
 
-   ![image-20210111144353331](.\image\hash分布不均匀情况下对比.png)
+   ![image-20210111144353331](./image/hash分布不均匀情况下对比.png)
 
 
 
