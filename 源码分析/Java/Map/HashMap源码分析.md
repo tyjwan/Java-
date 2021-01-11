@@ -497,7 +497,7 @@ final Node<K,V>[] resize() {
 
 (1) 处代码对应图片解释：
 
-![新的index计算原理](./image/HashMap(java8 resize).png)
+![新的index计算原理](./image/HashMap(java8resize).png)
 
 
 
