@@ -108,13 +108,16 @@
            
            // 通过tableAt()方法找到位置tab[i]的Node,当Node为null时证明数组这个位置还没有元素
            else if ((f = tabAt(tab, i = (n - 1) & hash)) == null) {
-               // 使用casTabAt()方法CAS操作将元素插入到Hash表中
+               // 使用casTabAt()方法CAS操作将元素插入到Hash表中，这里没法用synchronized，因为
+               // 是为null的。
                if (casTabAt(tab, i, null,
                             new Node<K,V>(hash, key, value, null)))
                    break;                   // no lock when adding to empty bin
            }
            // 说明ConcurrentHashmap需要扩容
            else if ((fh = f.hash) == MOVED)
+               // 如果当前线程发现正在扩容，会去帮助扩容，而不是干等着
+               // 怎么帮？每个线程分配16个槽位给你
                tab = helpTransfer(tab, f);
            
            // tab[i]不是null，发生了hash冲突，要看该插入到哪里去
@@ -129,7 +132,7 @@
                            binCount = 1;
                            for (Node<K,V> e = f;; ++binCount) {
                                K ek;
-                               // 插入的元素键值的hash值有节点中元素的hash值相同，替换当前元素的值
+                               // 插入的元素键值的hash值有节点中元素的hash值相同，并且key也相                             // 等替换当前元素的值
                                if (e.hash == hash &&
                                    ((ek = e.key) == key ||
                                     (ek != null && key.equals(ek)))) {
