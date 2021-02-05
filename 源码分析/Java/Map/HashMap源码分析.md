@@ -478,13 +478,14 @@ final Node<K,V>[] resize() {
                     // 将“低链表”添加到newTable中
                     if (loTail != null) {
                         loTail.next = null;
-                        newTab[j] = loHead;
+                        newTab[j] = loHead; // 将低位指针移动到新的数组上的同样的index位置
                     }
                     // 将“高链表”添加到newTable中
                     if (hiTail != null) {
                         hiTail.next = null;
-                        newTab[j + oldCap] = hiHead;
+                        newTab[j + oldCap] = hiHead;// 移动到新数组中老的容量加上index位置
                     }
+                    // 这种做法还避免了rehash
                 }
             }
         }
